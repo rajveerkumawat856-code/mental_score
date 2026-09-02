@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mental Health Score Estimator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <header class="masthead">
+      <h1>How's your relationship with your screen?</h1>
+      <p class="sub">Answer a few questions about your habits and we'll estimate a mental health score based on patterns from student survey data.</p>
+    </header>
+
+    <main class="layout">
+
+      <form id="predict-form" class="card">
+
+        <fieldset>
+          <legend>About you</legend>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="age">Age</label>
+              <input type="number" id="age" name="age" min="10" max="100" value="21" required />
+            </div>
+            <div class="field">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="country">Country</label>
+              <input type="text" id="country" name="country" placeholder="e.g. India" value="India" required />
+            </div>
+            <div class="field">
+              <label for="academic_level">Academic level</label>
+              <select id="academic_level" name="academic_level" required>
+                <option value="High School">High School</option>
+                <option value="Undergraduate" selected>Undergraduate</option>
+                <option value="Graduate">Graduate</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Social media habits</legend>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="most_used_platform">Most used platform</label>
+              <select id="most_used_platform" name="most_used_platform" required>
+                <option>Instagram</option>
+                <option>YouTube</option>
+                <option>WhatsApp</option>
+                <option>TikTok</option>
+                <option>Facebook</option>
+                <option>Snapchat</option>
+                <option>Twitter</option>
+                <option>LinkedIn</option>
+                <option>LINE</option>
+                <option>KakaoTalk</option>
+                <option>VKontakte</option>
+                <option>WeChat</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="purpose_of_use">Main purpose</label>
+              <select id="purpose_of_use" name="purpose_of_use" required>
+                <option>Entertainment</option>
+                <option>Networking</option>
+                <option>Education</option>
+                <option>News</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="avg_daily_usage_hours">Daily usage (hours)</label>
+              <input type="number" id="avg_daily_usage_hours" name="avg_daily_usage_hours" min="0" max="24" step="0.1" value="3.5" required />
+            </div>
+            <div class="field">
+              <label for="daily_unlocks">Phone unlocks per day</label>
+              <input type="number" id="daily_unlocks" name="daily_unlocks" min="0" value="60" required />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Daily rhythm</legend>
+
+          <div class="field-row three">
+            <div class="field">
+              <label for="study_hours">Study (hrs)</label>
+              <input type="number" id="study_hours" name="study_hours" min="0" max="24" step="0.1" value="4" required />
+            </div>
+            <div class="field">
+              <label for="physical_activity_hours">Activity (hrs)</label>
+              <input type="number" id="physical_activity_hours" name="physical_activity_hours" min="0" max="24" step="0.1" value="1" required />
+            </div>
+            <div class="field">
+              <label for="sleep_hours_per_night">Sleep (hrs)</label>
+              <input type="number" id="sleep_hours_per_night" name="sleep_hours_per_night" min="0" max="24" step="0.1" value="7" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="stress_level">Current stress level</label>
+            <select id="stress_level" name="stress_level" required>
+              <option>Low</option>
+              <option selected>Medium</option>
+              <option>High</option>
+              <option>Very High</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="api-url">API endpoint</label>
+          <input type="text" id="api-url" value="http://127.0.0.1:8000/predict" />
+        </div>
+
+        <button type="submit" id="submit-btn">Estimate my score</button>
+        <p class="error" id="error-msg" hidden></p>
+      </form>
+
+      <aside class="result-panel">
+        <div class="result-card" id="result-card">
+          <p class="result-label">Predicted score</p>
+          <svg id="gauge" viewBox="0 0 200 120" class="gauge">
+            <path d="M20,110 A90,90 0 0 1 180,110" fill="none" stroke="#E4E1D8" stroke-width="14" stroke-linecap="round"/>
+            <path id="gauge-fill" d="M20,110 A90,90 0 0 1 180,110" fill="none" stroke="#4C8577" stroke-width="14" stroke-linecap="round" stroke-dasharray="0 283" />
+          </svg>
+          <p class="result-number" id="result-number">—</p>
+          <p class="result-hint" id="result-hint">Fill in the form and submit to see your estimate.</p>
+        </div>
+      </aside>
+
+    </main>
+
+    <footer class="foot">
+      <p>This tool offers a rough, data-driven estimate only. It is not a diagnosis — if you're struggling, talk to someone you trust or a mental health professional.</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
