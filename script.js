@@ -38,6 +38,8 @@ form.addEventListener('submit', async (e) => {
       body: JSON.stringify(payload),
     });
 
+    console.log(response);
+
     if (!response.ok) {
       const detail = await safeReadError(response);
       throw new Error(detail || `Request failed with status ${response.status}`);
