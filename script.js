@@ -12,7 +12,7 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
   errorMsg.hidden = true;
 
-  const apiUrl = document.getElementById('api-url').value.trim();
+  const apiUrl = document.getElementById('api-url').value.trim() || '/api/predict';
 
   const payload = {
     age: Number(document.getElementById('age').value),
