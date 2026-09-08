@@ -57,7 +57,7 @@ class PredictionResponse(BaseModel):
 # HOME ROUTE
 # =========================================================
 
-@app.get("/")
+@app.get("/api")
 def home():
     return {
         "message": "Mental Health API is running"
@@ -171,7 +171,7 @@ class StudentData(BaseModel):
 # =========================================================
 
 @app.post(
-    "/predict",
+    "/api/predict",
     response_model=PredictionResponse
 )
 def predict(data: StudentData):
